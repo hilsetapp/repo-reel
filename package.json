@@ -1,0 +1,8 @@
+{
+  "name": "repo-reel",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Turn public GitHub repositories into animated 30-second trailers in the browser",
+  "scripts": {"test": "node --test tests/*.test.cjs"},
+  "engines": {"node": ">=20"}
+}

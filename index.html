@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#101511">
+  <title>Repo Reel: a short film for a GitHub repository</title>
+  <meta name="description" content="Turn a public GitHub repository into a 30-second animated trailer. Runs in your browser; no account or server required.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="wordmark" href="#top" aria-label="Repo Reel home"><span class="mark">R</span><span>REPO<span class="wordmark-light">REEL</span></span></a>
+    <div class="top-note"><span class="live-dot"></span> PUBLIC REPOS · BROWSER ONLY</div>
+    <a class="top-link" href="README.md">How it works <span>↗</span></a>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="eyebrow"><span>01</span><i></i> GITHUB REPOSITORY TRAILER</div>
+        <h1>A short film<br>for <em>your repository.</em></h1>
+        <p>Paste a public GitHub link. Repo Reel turns its README, code sample, stars and recent activity into a 30-second vertical video.</p>
+        <form id="repo-form" class="url-form">
+          <label class="sr-only" for="repo-url">GitHub repository URL</label>
+          <span class="gh-icon" aria-hidden="true">⌘</span>
+          <input id="repo-url" type="url" placeholder="https://github.com/owner/repository" autocomplete="url" required>
+          <button id="make-button" type="submit"><span>MAKE A REEL</span><b>↗</b></button>
+        </form>
+        <div class="form-foot"><span>PUBLIC REPOSITORIES ONLY</span><span>·</span><span>UP TO 60 API REQUESTS / HOUR</span><span class="spacer"></span><button id="sample-button" type="button">Try a sample repo</button></div>
+        <p class="error-line" id="error-line" role="status" aria-live="polite"></p>
+      </div>
+      <div class="hero-art" aria-label="Animated repository trailer preview">
+        <div class="film-label"><span>PREVIEW / 30 SEC</span><span class="film-dots">● ● ●</span></div>
+        <div class="phone-frame"><canvas id="reel-canvas" width="360" height="640" aria-label="Repository reel preview"></canvas><div class="reel-overlay"><span class="play-symbol">▶</span></div></div>
+        <div class="art-caption"><span id="preview-status">WAITING FOR A REPOSITORY</span><span class="frame-counter">9:16 / 30s</span></div>
+        <div class="film-strip" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      </div>
+    </section>
+
+    <section class="workbench hidden" id="workbench">
+      <div class="bench-head"><div><div class="eyebrow"><span>02</span><i></i> THE CUT</div><h2 id="repo-title">Repository trailer</h2><p id="repo-subtitle">Your data is ready. Review the reel before export.</p></div><button class="reset-button" id="reset-button">← DIFFERENT REPO</button></div>
+      <div class="work-grid">
+        <div class="timeline-panel">
+          <div class="timeline-top"><div><span class="micro-label">STORYBOARD</span><strong>Six scenes. Thirty seconds.</strong></div><button id="play-button" class="play-button" type="button">▶ PLAY</button></div>
+          <div class="beat-list" id="beat-list"></div>
+          <div class="export-row"><div><span class="micro-label">EXPORT</span><strong>Choose an export format.</strong></div><div class="export-actions"><button class="export-button" id="gif-button" type="button">↓ GIF</button><button class="export-button export-primary" id="mp4-button" type="button">↓ MP4</button></div></div>
+          <div class="export-progress hidden" id="export-progress"><div class="progress-head"><span id="progress-label">Preparing frames</span><span id="progress-percent">0%</span></div><div class="progress-track"><span id="progress-fill"></span></div><button id="cancel-export" type="button">CANCEL</button></div>
+          <p class="export-note" id="export-note">GIF runs locally in modern browsers. MP4 depends on your browser and operating system supporting H.264 recording.</p>
+        </div>
+        <aside class="facts-panel">
+          <div class="micro-label">PULLED FROM THE REPO</div>
+          <div class="fact-row"><span>Stars</span><strong id="fact-stars">not loaded</strong></div>
+          <div class="fact-row"><span>Forks</span><strong id="fact-forks">not loaded</strong></div>
+          <div class="fact-row"><span>Open issues</span><strong id="fact-issues">not loaded</strong></div>
+          <div class="fact-row"><span>Last push</span><strong id="fact-push">not loaded</strong></div>
+          <div class="fact-row"><span>Primary language</span><strong id="fact-language">not loaded</strong></div>
+          <div class="fact-source">Readme, repository metadata, and recent commits are fetched directly from GitHub's public API. The reel is rendered locally.</div>
+        </aside>
+      </div>
+      <div class="data-warning"><span>i</span><p>GitHub limits unauthenticated API access. If you hit the limit, try again later. Repo Reel reads public repository data only and does not upload your result.</p></div>
+    </section>
+
+    <section class="how-grid">
+      <div class="how-intro"><div class="eyebrow"><span>03</span><i></i> FROM REPO TO REEL</div><h2>From README<br><em>to a short reel.</em></h2></div>
+      <div class="how-step"><span>01 / FETCH</span><h3>Read the repository.</h3><p>Stars, description, README highlights, a code sample, and a small slice of commit history.</p></div>
+      <div class="how-step"><span>02 / CUT</span><h3>Arrange the scenes.</h3><p>Six short scenes turn repository facts into an animated vertical story.</p></div>
+      <div class="how-step"><span>03 / SHARE</span><h3>Export the video.</h3><p>Export a GIF, or MP4 where your browser's media recorder supports it.</p></div>
+    </section>
+  </main>
+  <footer><span>REPO REEL <b>·</b> BUILT IN YOUR BROWSER</span><span>NO LOGIN. NO SERVER. PUBLIC REPOS ONLY.</span></footer>
+  <script src="src/reel.js"></script>
+  <script src="src/app.js"></script>
+</body>
+</html>
