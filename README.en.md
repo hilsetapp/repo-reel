@@ -4,7 +4,11 @@
 
 Turn a public GitHub repository into a short vertical trailer with its description, stars, README highlights, a code sample, and recent commit rhythm. Public data comes from GitHub's API; the reel is rendered and exported in the browser. No account or server required.
 
-## Run
+## Open the app
+
+[Launch Repo Reel in your browser](https://hilsetapp.github.io/repo-reel/)
+
+## Run locally
 
 Open `index.html`, or start a local server:
 
